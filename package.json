@@ -1,0 +1,13 @@
+{
+  "name": "five-in-a-row",
+  "version": "1.0.0",
+  "repository": "https://github.com/yuantau/five-in-a-row.git",
+  "author": "yuantau <yuantau@icloud.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "lib",
+    "server",
+    "client"
+  ]
+}
