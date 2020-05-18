@@ -71,6 +71,8 @@ enter() {
 
 现在需要把前端的游戏界面整出来了，我简单的画了几个框框。
 
+![Battle](./battlefield.png)
+
 ````ts
 export default function BattleField() {
     return (
@@ -304,6 +306,10 @@ check(index: number) {
 ````
 
 那么，加上一些必要的玩家中途退出的处理，这个小DEMO差不多算是完成了。
+
+![Game](./game.png)
+
+最终代码戳这里：https://github.com/pink-puppy/five-in-a-row/commits/master
 
 总结：周末两天花在这上面的时间应该超过8个小时了，这大大超出我原来的预期，再简单的东西如果加上实时交互复杂度就倍增，这还是在这个小游戏没有需要处理同步的需求。
 
