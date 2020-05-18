@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import Connection from "./Connection";
+import Game from "./Game";
 
 type State = {
     loading: boolean,
@@ -9,7 +9,6 @@ type State = {
     token: string,
 }
 
-const connection = new Connection();
 
 const Connect = (): [State, React.Dispatch<string>] => {
     const [loading, setLoading] = useState(false);
@@ -31,15 +30,15 @@ const Connect = (): [State, React.Dispatch<string>] => {
             setLoading(false);
             if (res.status === 200) {
                 const { token } = await res.json();
-                connection.name = name;
-                connection.token = token;
+                Game.name = name;
+                Game.token = token;
+                Game.logged = true;
                 setToken(token);
                 setLogged(true);
             } else {
                 const errmsg = await res.text();
                 setError(errmsg);
             }
-
         }
         if (name && !logged) {
             request();
@@ -48,4 +47,4 @@ const Connect = (): [State, React.Dispatch<string>] => {
     return [{ loading, error, logged, name, token }, setName];
 }
 
-export { Connect, connection }
+export { Connect }

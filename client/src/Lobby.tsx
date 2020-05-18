@@ -1,30 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { connection } from './Networking';
+
 import { useHistory } from 'react-router-dom';
-import { Room } from 'lib/protocol';
+import { Room, UPDATE_ROOM } from 'lib/protocol';
 import RoomCompoent from './Room';
+import Game from './Game';
 
 export default function Lobby() {
     const history = useHistory();
     const [roomList, setRoomList] = useState<Room[]>([]);
     const [connected, setConnected] = useState(false);
     useEffect(() => {
-        connection.on('connect', () => {
-            setConnected(true);
-        });
-        connection.on('roomList', (rooms: Room[]) => {
+        Game.on('welcome', () => setConnected(true));
+        Game.on('roomList', (rooms: Room[]) => {
             setRoomList(rooms);
         });
-        connection.on('enterRoom', (roomId: number, isHost: boolean) => {
+        Game.on('enterRoom', () => {
             history.push('/battle')
         });
-        if (!connection.token) {
+        Game.on('updateRoom', (updated: UPDATE_ROOM) => {
+            setRoomList(rooms => {
+                let room = rooms.find(r => r.id === updated.id);
+                if (room) room.members = updated.members;
+                return [...rooms];
+            })
+        });
+        Game.on('close', () => history.push('/'));
+        if (!Game.connect()) {
             history.push('/');
-        } else {
-            connection.connect();
         }
         return () => {
-            connection.removeAllListeners();
+            Game.removeAllListeners();
         }
     }, [history])
     return (
@@ -35,12 +40,12 @@ export default function Lobby() {
                         <RoomCompoent
                             key={room.id}
                             {...room}
-                            onClick={roomId => connection.enterRoom(roomId)}
+                            onClick={roomId => Game.enterRoom(roomId)}
                         />
                     )
                 )
             }
-            <button className="newRoom" disabled={!connected} onClick={() => connection.createRoom()}>NEW</button>
+            <button className="newRoom" disabled={!connected} onClick={() => Game.createRoom()}>NEW</button>
         </div>
     )
 }

@@ -7,6 +7,7 @@ export default class Player extends EventEmitter {
     roomId: number = 0;
     id: number;
     name: string;
+    ready: boolean = false;
     constructor(public connection: Connection) {
         super();
         this.id = connection.id;

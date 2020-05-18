@@ -127,3 +127,89 @@ code {
   background: #35a2f4;
   cursor: pointer;
 }
+
+
+.battleField{
+  display: flex;
+  width: 650px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+.chair{
+  width: 200px;
+  height: 170px;
+  background: #eaeaea;
+}
+
+.chair:first-child{
+  margin-bottom: 22px;
+}
+
+.chair.isBlack{
+  background: black;
+}
+
+.chair.isBlack .username{
+  color: white;
+}
+
+
+.chair.isBlack .status{
+  color: white;
+}
+
+.players{
+  width:200px;
+  padding-top:15px;
+}
+
+.username{
+  font-size: 40px;
+  text-align: center;
+  padding: 30px 20px 10px 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow:hidden;
+}
+
+.status{
+  text-align: center;
+}
+
+.controls {
+  margin-top: 20px;
+}
+.controls button{
+  padding: 5px 15px;
+  margin-right: 8px;
+}
+
+.controls button:last-child{
+  margin-right: 0;
+}
+
+.dialog{
+  width: 100%;
+  min-height: 100px;
+  max-height: 300px;
+  overflow: auto;
+  padding: 10px;
+}
+
+.dialog .msg{
+  background: #f1f1f1;
+  margin-bottom: 2px;
+}
+
+.dialog .msg.sys{
+
+  color:lightslategray
+}
+
+.dialog .msg.win{
+  color: red;
+}
+
+.dialog .msg.lost{
+  color:black;
+}

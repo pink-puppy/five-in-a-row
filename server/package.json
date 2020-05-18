@@ -14,6 +14,7 @@
     "ws": "^7.3.0"
   },
   "scripts": {
+    "prestart": "node scripts/clear",
     "start": "nodemon src/index.ts"
   },
   "nodemonConfig": {
@@ -21,7 +22,7 @@
       "src"
     ],
     "events": {
-      "start": "node -e 'console.clear()'"
+      "start": "node scripts/clear"
     }
   },
   "devDependencies": {
